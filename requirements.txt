@@ -1,12 +1,10 @@
 Flask==0.9
-Flask-Login==0.2.7
-Flask-OpenID==1.1.1
 Jinja2==2.7.1
 MarkupSafe==0.18
 Werkzeug==0.9.4
 argparse==1.2.1
 gunicorn==18.0
-python-openid==2.2.5
 wsgiref==0.1.2
 psycopg2==2.5.2
 requests==2.1.0
+requests-oauthlib==0.4.0
