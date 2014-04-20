@@ -28,13 +28,34 @@ def get_tweets(screen_name, count=15):
 
 
 def get_user_info(**kwargs):
+    """
+    Returns user info for the specified user
+    Kwargs - screen_name, user_id
+    Either of screen_name or user_id must be passed
+    """
     url = 'https://api.twitter.com/1.1/users/show.json'
     screen_name = kwargs.get('screen_name')
     user_id = kwargs.get('user_id')
-    include_entities = kwargs.get('include_entities', False)
     params = {'screen_name': screen_name,
               'user_id': user_id,
-              'include_entities': include_entities
+              'include_entities': 'false'
+              }
+    try:
+        r = requests.get(url, params=params, auth=oauth)
+        return json.loads(r.text)
+    except Exception as e:
+        print e
+        return False
+
+
+def get_retweeters(tweet_id, cursor=-1):
+    """
+    Returns list of user ids who have retweeted the specified tweet
+    """
+    url = 'https://api.twitter.com/1.1/statuses/retweeters/ids.json'
+    params = {'id': tweet_id,
+              'cursor': cursor,
+              'stringify_ids': 'true'
               }
     try:
         r = requests.get(url, params=params, auth=oauth)
