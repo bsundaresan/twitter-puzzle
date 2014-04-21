@@ -3,7 +3,6 @@ __author__ = 'ishaan'
 import config
 import requests
 import json
-import db_conn
 from requests_oauthlib import OAuth1
 
 oauth = OAuth1(config.APP_KEY, client_secret=config.APP_SECRET, resource_owner_key=config.ACCESS_TOKEN,
