@@ -1,0 +1,13 @@
+<html>
+<body>
+    <div style="height:200px">
+        {% for user in data %}
+            <div id={{user.screen_name}} style="display:block;float:left;width:10%">
+                <a href="/{{user.id}}">
+                    <img src={{user.profile_image_url}} style="width:90%;height:90%;border-radius:50%">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
