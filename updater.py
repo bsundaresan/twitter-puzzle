@@ -47,7 +47,7 @@ def update():
         if not rt_ids:
             print "Could not Update " + h.screen_name
             continue
-        print str(len(rt_ids)) + "Retweets found"
+        print str(len(rt_ids['ids'])) + "Retweets found"
         rt_users = []
         counter = 0
         top_ten = []
@@ -66,7 +66,7 @@ def update():
         rt_user_images = [x['profile_image_url'].replace('_normal', '') for x in rt_users]
         h.tweet_data = json.dumps(rt_user_images)
         h.last_updated = datetime.now()
-        h.etag = hashlib.sha1(json.dumps(rt_user_images)).hexdigest()
+        h.etag = hashlib.sha1(json.dumps(rt_user_images) + str(h.last_updated)).hexdigest()
         print "Updated"
     db.session.commit()
 
