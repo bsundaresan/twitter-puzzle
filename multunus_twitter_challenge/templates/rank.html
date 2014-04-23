@@ -27,10 +27,16 @@
             </div>
         {% endfor %}
     </div>
-    <div>
-        <center>
+    <div style="clear:both">
+            <div style="float:left">
             <img src="{{handle_data.profile_image_url}}">
-        </center>
+             </div>
+            <div style="float:right">
+                The following tweet was used to generate the ranks<br/>
+                <a href="http://twitter.com/{{handle_data.screen_name}}/status/{{handle_data.tweet_id}}">
+                    {{handle_data.tweet_text}}
+                </a>
+            </div>
     </div>
 </body>
 </html>
