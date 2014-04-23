@@ -11,7 +11,7 @@ oauth = OAuth1(config.APP_KEY, client_secret=config.APP_SECRET, resource_owner_k
                )
 
 
-def get_tweet(screen_name, count=15):
+def get_tweet(screen_name, count=50):
     """
     Returns a random tweet from count number of recent tweets for the specified user
     """
@@ -22,7 +22,8 @@ def get_tweet(screen_name, count=15):
     try:
         r = requests.get(url, params=params, auth=oauth)
         tweets = json.loads(r.text)
-        return random.choice(tweets)
+        filtered_tweets = filter(lambda x: x['retweet_count'] >= 5, tweets)
+        return random.choice(filtered_tweets)
     except Exception as e:
         print e
         return False
