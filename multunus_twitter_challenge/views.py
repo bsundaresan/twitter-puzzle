@@ -23,6 +23,7 @@ def home():
             return response
     try:
         users = User.query.all()
+        users = users.sort(key=lambda x: x.id)
     except Exception as e:
         print e
         return "Something went wrong"
