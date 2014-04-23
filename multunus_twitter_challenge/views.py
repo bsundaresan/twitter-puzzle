@@ -13,7 +13,7 @@ handle_data = []
 
 @app.route('/', methods=['GET'])
 def home():
-    etag = hashlib.sha1('asd').hexdigest()
+    etag = hashlib.sha1('asd').hexdigest()  # Assuming home page content will never change
     etag_from_browser = request.headers.get('If-None-Match')
     if etag_from_browser:
         etag_from_browser = etag_from_browser.replace('"', '')

@@ -4,15 +4,16 @@ import config
 import requests
 import json
 from requests_oauthlib import OAuth1
+import random
 
 oauth = OAuth1(config.APP_KEY, client_secret=config.APP_SECRET, resource_owner_key=config.ACCESS_TOKEN,
                resource_owner_secret=config.ACCESS_TOKEN_SECRET
                )
 
 
-def get_tweets(screen_name, count=15):
+def get_tweet(screen_name, count=15):
     """
-    Returns count number of tweets for the specified user
+    Returns a random tweet from count number of recent tweets for the specified user
     """
     url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
     params = {'screen_name': screen_name,
@@ -20,7 +21,8 @@ def get_tweets(screen_name, count=15):
               }
     try:
         r = requests.get(url, params=params, auth=oauth)
-        return json.loads(r.text)
+        tweets = json.loads(r.text)
+        return random.choice(tweets)
     except Exception as e:
         print e
         return False
