@@ -17,7 +17,9 @@ def get_tweet(screen_name, count=50):
     """
     url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
     params = {'screen_name': screen_name,
-              'count': count
+              'count': count,
+              'include_rts': 'false',
+              'exclude_replies': 'true'
               }
     try:
         r = requests.get(url, params=params, auth=oauth)

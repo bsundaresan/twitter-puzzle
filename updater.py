@@ -34,18 +34,20 @@ def update():
         all_handles = User.query.all()
 
     for h in all_handles:
-        print h.screen_name + '\n'
+        print '\n' + h.screen_name
         tweet_id = h.tweet_id
         if not tweet_id:
-            print "Existing Tweet not found...Trying to get one\n"
+            print "Existing Tweet not found...Trying to get one"
             if not change_tweet(h):
-                print "Could not Update " + h.screen_name + '\n'
+                print "Could not Update " + h.screen_name
                 continue
             tweet_id = h.tweet_id
+        print "TWEET ID ----->" + tweet_id
         rt_ids = twitter_api.get_retweeters(tweet_id)
         if not rt_ids:
-            print "Could not Update " + h.screen_name + '\n'
+            print "Could not Update " + h.screen_name
             continue
+        print str(len(rt_ids)) + "Retweets found"
         rt_users = []
         counter = 0
         top_ten = []
@@ -65,6 +67,7 @@ def update():
         h.tweet_data = json.dumps(rt_user_images)
         h.last_updated = datetime.now()
         h.etag = hashlib.sha1(json.dumps(rt_user_images)).hexdigest()
+        print "Updated"
     db.session.commit()
 
 
@@ -84,7 +87,7 @@ def change_tweet(user):
 
 def init():
     """
-    Creates DB entry for all 9 handles and gets their profile image
+    Creates DB entry for all 9 handles and saves their profile image
     """
     for h in handles:
         u = User(screen_name=h)
