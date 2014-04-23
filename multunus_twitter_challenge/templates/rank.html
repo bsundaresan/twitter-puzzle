@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{handle_data.screen_name}}</title>
+</head>
+<body>
+    <div>
+        <center>
+            Last updated at {{handle_data.last_updated.strftime("%y-%m-%d %H:%M:%S")}}
+        </center>
+    </div>
+
+    <div style="float:right">
+        <div>
+            <a href="/">
+                Try another handle
+            </a>
+        </div>
+    </div>
+    <div style="height:30px">
+
+    </div>
+    <div style="height:200px;float:left">
+        {% for image in ranked_data %}
+            <div style="display:block;float:left;width:10%">
+                <img src={{image}} style="width:90%;height:90%;border-radius:50%">
+            </div>
+        {% endfor %}
+    </div>
+    <div>
+        <center>
+            <img src="{{handle_data.profile_image_url}}">
+        </center>
+    </div>
+</body>
+</html>
